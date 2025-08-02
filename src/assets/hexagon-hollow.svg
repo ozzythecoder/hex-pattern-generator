@@ -1,0 +1,21 @@
+<svg height="100" width="100" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <clipPath id="hexagon-mask">
+            <use xlink:href="#hexagon"/>
+        </clipPath>
+
+        <polygon
+                fill="none"
+                id="hexagon"
+                points="25,0 75,0 100,50 75,100 25,100 0,50"
+        />
+    </defs>
+
+    <use
+        clip-path="url(#hexagon-mask)"
+        stroke="blue"
+        stroke-width="35"
+        xlink:href="#hexagon"
+    />
+</svg>

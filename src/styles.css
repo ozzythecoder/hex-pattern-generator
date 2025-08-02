@@ -1,0 +1,25 @@
+#root {
+    --background: 60 80% 90%;
+    --stroke: blue;
+    --stroke-width: 35;
+
+    min-height: 100dvh;
+    background: hsl(var(--background));
+}
+
+#hex-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .hex-row {
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+    }
+}
+
+.box {
+    border: 1px solid black;
+    width: fit-content;
+}
