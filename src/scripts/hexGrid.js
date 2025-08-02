@@ -40,7 +40,8 @@ function buildHexGrid(
     // Count rows correctly based on offset
     // Is this how other people see it though?
     if (orientation === "horizontal") {
-        width /= 2;
+        height *= 2
+        width /= 2
     }
 
     for (let i = 0; i < height; i++) {
@@ -68,6 +69,9 @@ function renderHexGrid(grid, orientation) {
     gridRoot.style.boxSizing = 'border-box';
     gridRoot.style.width = 'fit-content';
     gridRoot.style.lineHeight = '0';
+
+    console.log('rows:', grid.length)
+    console.log('columns:', grid[0].length)
 
     for (let row = 0; row < grid.length; row++) {
         const rowElement = document.createElement('div');

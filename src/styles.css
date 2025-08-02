@@ -40,7 +40,6 @@ body {
             top: 1.2rem;
             left: 0;
             font-size: 0.75rem;
-            color: black;
         }
     }
 
@@ -91,12 +90,12 @@ body {
             }
         }
     }
-
-
 }
 
-.hex-container {
-    width: fit-content;
+#hex-root {
+    width: 100%;
+    max-width: 100%;
+    object-fit: contain;
 }
 
 .centered {
@@ -105,4 +104,21 @@ body {
 
 .gutter {
     max-width: var(--max-width);
+}
+
+@media print {
+    @page {
+        margin: 0.5cm;
+    }
+    body {
+        visibility: hidden;
+    }
+    #hex-root {
+        visibility: visible;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 }
