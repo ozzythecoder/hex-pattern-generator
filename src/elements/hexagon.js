@@ -1,5 +1,5 @@
 class Hexagon extends HTMLElement {
-    static observedAttributes = ["orientation"];
+    static observedAttributes = ["orientation", "fill"];
 
     constructor() {
         super();
@@ -23,7 +23,7 @@ class Hexagon extends HTMLElement {
                     </clipPath>
 
                     <polygon
-                        fill="none"
+                        fill="${this.getAttribute('fill') ? 'var(--fill)' : 'none'}"
                         id="hexagon"
                         points="25,0 75,0 100,50 75,100 25,100 0,50"
                     />

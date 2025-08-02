@@ -31,6 +31,9 @@ img, picture, video, canvas, svg {
 /* 7. Inherit fonts for form controls */
 input, button, textarea, select {
     font: inherit;
+    line-height: inherit;
+    padding-block: 0.2rem;
+    padding-inline: 0.4rem;
 }
 
 /* 8. Avoid text overflows */

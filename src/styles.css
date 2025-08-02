@@ -1,25 +1,108 @@
-#root {
-    --background: 60 80% 90%;
-    --stroke: blue;
-    --stroke-width: 35;
+body {
+    --background: hsl(60, 80%, 90%);
 
+    font-family: 'Nata Sans', sans-serif;
     min-height: 100dvh;
-    background: hsl(var(--background));
+    background-color: var(--background);
+}
+
+#root {
+    --max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+#page-title {
+    margin-bottom: 2rem;
+}
+
+.options {
+    display: grid;
+    max-width: 768px;
+    margin-inline: auto;
+    grid-template-columns: 1fr 1fr;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    > .buttons {
+        grid-column-end: span 2;
+        margin-inline: auto;
+        padding-inline: 1rem;
+        padding-block: 0.5rem;
+    }
+
+    > label {
+        position: relative;
+
+        > .paranthetical {
+            position: absolute;
+            top: 1.2rem;
+            left: 0;
+            font-size: 0.75rem;
+            color: black;
+        }
+    }
+
+    > #error-root {
+        h2 {
+            font-size: 1.3rem;
+        }
+
+        grid-column-end: span 2;
+        color: hsl(0, 100%, 40%);
+    }
 }
 
 #hex-grid {
+    --stroke: blue;
+    --fill: blue;
+    --stroke-width: 35;
+    --hex-width: 100px;
+    --hex-spacing: 2px;
+
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0;
 
     .hex-row {
         display: flex;
         flex-direction: row;
-        gap: 4px;
+
+        &.horizontal {
+            --vertical-offset: calc(var(--hex-width) / -2);
+            --horizontal-offset: calc(var(--hex-width) / 2);
+            gap: calc(var(--horizontal-offset) + var(--hex-spacing));
+
+            &:nth-of-type(even) {
+                margin-left: calc(var(--hex-width) / 1.333 + var(--hex-spacing) / 2);
+                margin-block: calc(var(--vertical-offset) + var(--hex-spacing) / 2);
+            }
+        }
+
+        &.vertical {
+            --horizontal-offset: calc(var(--hex-width) / 2);
+            --vertical-offset: calc(var(--hex-width) / -4);
+            gap: var(--hex-spacing);
+
+            &:nth-of-type(even) {
+                margin-inline: calc(var(--horizontal-offset) + var(--hex-spacing) / 2);
+                margin-block: calc(var(--vertical-offset) + var(--hex-spacing) / 2);
+            }
+        }
     }
+
+
 }
 
-.box {
-    border: 1px solid black;
+.hex-container {
     width: fit-content;
+}
+
+.centered {
+    margin-inline: auto;
+}
+
+.gutter {
+    max-width: var(--max-width);
 }

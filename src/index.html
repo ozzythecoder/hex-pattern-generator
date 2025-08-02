@@ -5,15 +5,46 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <script defer src="./scripts/index.js" type="module"></script>
         <script src="elements/hexagon.js"></script>
-        <link href="./styles.css" rel="stylesheet" />
         <link href="./reset.css" rel="stylesheet" />
+        <link href="./styles.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com" rel="preconnect">
+        <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+        <link href="https://fonts.googleapis.com/css2?family=Nata+Sans:wght@100..900&display=swap" rel="stylesheet">
         <title>Hex Pattern Generator</title>
     </head>
     <body>
         <div id="root">
-            <button id="generate-h">Generate hz</button>
-            <button id="generate-v">Generate v</button>
-            <div id="hex-grid">
+            <div class="centered gutter">
+                <h1 id="page-title">Hex Wall Pattern Generator</h1>
+                <div class="options">
+                    <label for="width-input">Width
+                    </label>
+                    <input id="width-input" max="30" type="number" value="10" />
+                    <label for="height-input">Height
+                    </label>
+                    <input id="height-input" max="14" type="number" value="8" />
+                    <label for="orientation-input">Orientation
+                    </label>
+                    <select id="orientation-input">
+                        <option value="horizontal">Horizontal</option>
+                        <option value="vertical">Vertical</option>
+                    </select>
+                    <label for="hex-range-input">
+                        Hex Range
+                        <span class="paranthetical">(higher = more solids, lower = more hollows)</span>
+                    </label>
+                    <input id="hex-range-input" max="0.95" min="0.05" step="0.05" type="range" value="0.5" />
+                    <div class="buttons">
+                        <button id="generate">Generate</button>
+                        <button id="clear">Clear</button>
+                        <button id="print">Print</button>
+                    </div>
+                    <div id="error-root"></div>
+                </div>
+            </div>
+            <div class="hex-container centered">
+                <div id="hex-grid">
+                </div>
             </div>
         </div>
     </body>
