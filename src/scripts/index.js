@@ -37,12 +37,12 @@ $.id('clear').addEventListener('click', () => {
     $.id('hex-grid').innerHTML = '';
 })
 
-$.id('print').addEventListener('click', sendHexGridToPrinter);
+$.id('print').addEventListener('click', sendToPrinter);
 
 
 ///////////////////
 
-function sendHexGridToPrinter() {
+function sendToPrinter() {
     console.log('Got here')
     const hexRoot = $.id('hex-root');
     const hexGrid = $.id('hex-grid');

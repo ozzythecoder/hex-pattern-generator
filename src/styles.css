@@ -51,6 +51,7 @@ body {
         grid-column-end: span 2;
         color: hsl(0, 100%, 40%);
     }
+
 }
 
 #hex-grid {
@@ -93,9 +94,7 @@ body {
 }
 
 #hex-root {
-    width: 100%;
-    max-width: 100%;
-    object-fit: contain;
+    width: fit-content;
 }
 
 .centered {
