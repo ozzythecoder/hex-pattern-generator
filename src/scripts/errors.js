@@ -21,28 +21,60 @@ function clearErrors() {
     errorRoot.innerHTML = '';
 }
 
+
 /**
  * @param {HexGridInputs} inputs
  */
 function validateInputs(inputs) {
     const errors = [];
-    if (inputs.height < 1) {
-        errors.push('Height must be greater than 0');
+
+    const result = validateAll([
+        {
+            condition: () => inputs.height > 0,
+            invalidMessage: 'Height must be greater than 0'
+        },
+        {
+            condition: () => inputs.width > 0,
+            invalidMessage: 'Width must be greater than 0'
+        },
+        {
+            condition: () => inputs.randomnessModifier >= 0 && inputs.randomnessModifier <= 1,
+            invalidMessage: 'Randomness modifier must be a double precision float between 0 and 1 non-inclusive'
+        },
+        {
+            condition: () => inputs.orientation === 'vertical' || inputs.orientation === 'horizontal',
+            invalidMessage: 'Orientation must be either vertical or horizontal'
+        }
+    ])
+
+    if (result.success) return true;
+    printErrors(result.errors);
+    return false;
+}
+
+/**
+ * @typedef Validator
+ * @prop {() => boolean} condition
+ * @prop {string} invalidMessage
+ */
+
+/**
+ * @param {Validator[]} validators
+ * @return {{ success: true, errors: undefined } || { success: false, errors: string[] }}
+ */
+function validateAll(validators) {
+    for (let validator of validators) {
+        if (!validator.condition()) {
+            return {
+                success: false,
+                errors: [validator.invalidMessage]
+            }
+        }
     }
-    if (inputs.width < 1) {
-        errors.push('Width must be greater than 0');
+    return {
+        success: true,
+        errors: undefined
     }
-    if (inputs.randomnessModifier < 0) {
-        errors.push('Randomness modifier must be a double precision float between 0 and 1 non-inclusive');
-    }
-    if (inputs.orientation !== 'vertical' && inputs.orientation !== 'horizontal') {
-        errors.push('Orientation must be either vertical or horizontal');
-    }
-    if (errors.length > 0) {
-        printErrors(errors);
-        return false;
-    }
-    return true;
 }
 
 export {printErrors, clearErrors, validateInputs}
