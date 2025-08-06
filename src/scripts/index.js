@@ -37,10 +37,22 @@ $.id('clear').addEventListener('click', () => {
     $.id('hex-grid').innerHTML = '';
 })
 
+$.id('all-hollow-btn').addEventListener('click', () => {
+    const hexes = $.id('hex-grid').querySelectorAll('hexagon-block');
+    for (let hex of hexes) {
+        hex.removeAttribute('fill');
+    }
+})
+
+$.id('all-solid-btn').addEventListener('click', () => {
+    const hexes = $.id('hex-grid').querySelectorAll('hexagon-block');
+    for (let hex of hexes) {
+        hex.setAttribute('fill', 'true');
+    }
+})
+
 $.id('print').addEventListener('click', sendToPrinter);
 
-
-///////////////////
 
 function sendToPrinter() {
     const hexGrid = $.id('hex-grid');
