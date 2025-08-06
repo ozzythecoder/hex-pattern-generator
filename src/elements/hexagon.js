@@ -16,11 +16,21 @@ class Hexagon extends HTMLElement {
     }
 
     connectedCallback() {
-        this.addEventListener('click', this.handleClick.bind(this))
+        this.addEventListener('mousedown', this.handleClick.bind(this))
+        this.addEventListener('mouseover', (e) => {
+            if (e.buttons > 0) {
+                this.handleClick()
+            }
+        })
     }
 
     disconnectedCallback() {
-        this.removeEventListener('click', this.handleClick.bind(this));
+        this.removeEventListener('mousedown', this.handleClick.bind(this));
+        this.removeEventListener('mouseover', (e) => {
+            if (e.buttons > 0) {
+                this.handleClick()
+            }
+        })
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
@@ -29,10 +39,10 @@ class Hexagon extends HTMLElement {
                 this.setFill(newVal);
                 break;
             case 'orientation':
-                    this.setOrientation(newVal);
-                    break;
+                this.setOrientation(newVal);
+                break;
             default:
-                // nothin
+            // nothin
         }
         this.render();
     }
@@ -49,6 +59,7 @@ class Hexagon extends HTMLElement {
     handleClick() {
         const fill = this.getAttribute('fill');
         !!fill ? this.removeAttribute('fill') : this.setAttribute('fill', 'true');
+        this.render();
     }
 
     render() {
