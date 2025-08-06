@@ -43,8 +43,6 @@ $.id('print').addEventListener('click', sendToPrinter);
 ///////////////////
 
 function sendToPrinter() {
-    console.log('Got here')
-    const hexRoot = $.id('hex-root');
     const hexGrid = $.id('hex-grid');
     if (!hexGrid || hexGrid.innerHTML === '') {
         printErrors(["Can't print an empty grid"])
