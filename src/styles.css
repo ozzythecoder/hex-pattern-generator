@@ -63,31 +63,58 @@ body {
 
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     gap: 0;
+
+    :has(.horizontal) {
+    }
 
     .hex-row {
         display: flex;
         flex-direction: row;
 
         &.horizontal {
-            --vertical-offset: calc(var(--hex-width) / -2);
-            --horizontal-offset: calc(var(--hex-width) / 2);
-            gap: calc(var(--horizontal-offset) + var(--hex-spacing));
+            --horizontal-offset: calc(var(--hex-width) * -0.25);
+            --vertical-offset: calc(var(--hex-width) * -0.5);
+            gap: var(--hex-spacing);
+            margin-block: calc( var(--hex-spacing) / 2);
 
-            &:nth-of-type(even) {
-                margin-left: calc(var(--hex-width) / 1.333 + var(--hex-spacing) / 2);
-                margin-block: calc(var(--vertical-offset) + var(--hex-spacing) / 2);
+            > :nth-child(even) {
+                margin-inline: calc(var(--horizontal-offset));
+                margin-block: calc(var(--vertical-offset) - var(--hex-spacing) / 2);
+
+                &:last-of-type {
+                    margin-right: 0;
+                }
             }
+
+            &:first-of-type {
+                overflow-y: hidden;
+            }
+
+            &:last-of-type {
+                margin-bottom: calc(var(--hex-width) * -1 - var(--hex-spacing));
+            }
+
         }
 
         &.vertical {
-            --horizontal-offset: calc(var(--hex-width) / 2);
-            --vertical-offset: calc(var(--hex-width) / -4);
+            overflow-y: visible;
+            --horizontal-offset: calc(var(--hex-width) * -0.5);
+            --vertical-offset: calc(var(--hex-width) * -0.25);
             gap: var(--hex-spacing);
+            margin-bottom: calc(var(--vertical-offset) + var(--hex-spacing));
+
+            &:nth-of-type(odd) {
+                margin-right: calc(var(--horizontal-offset) - var(--hex-spacing) / 2);
+            }
 
             &:nth-of-type(even) {
-                margin-inline: calc(var(--horizontal-offset) + var(--hex-spacing) / 2);
-                margin-block: calc(var(--vertical-offset) + var(--hex-spacing) / 2);
+                margin-left: calc(var(--horizontal-offset) - var(--hex-spacing) / 2);
+            }
+
+            &:last-child {
+                margin-bottom: 0;
             }
         }
     }
@@ -109,9 +136,11 @@ body {
     @page {
         margin: 0.5cm;
     }
+
     body {
         visibility: hidden;
     }
+
     #hex-root {
         visibility: visible;
         position: absolute;
