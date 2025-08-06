@@ -37,16 +37,28 @@ function buildHexGrid(
      */
     const hexagons = [];
 
-    // Count rows correctly based on offset
-    // Is this how other people see it though?
+    // get orientation
+    // if vertical,
+    //  - every odd row should have an extra hex at end
+    //  - every even row should have an extra hex at beginning
+    // if horizontal,
+    //  - first and last rows should have twice as many hexes
+    //  - first row: every even hex offset up by 1/2 a hex
+    //  - last row: every odd hex offset down by 1/2 a hex
+    let renderHeight = parseInt(height);
     if (orientation === "horizontal") {
-        height *= 2
-        width /= 2
+        renderHeight += 1;
     }
 
-    for (let i = 0; i < height; i++) {
+    for (let i = 0; i < renderHeight; i++) {
         const row = [];
-        for (let j = 0; j < width; j++) {
+
+        let renderWidth = parseInt(width);
+        if (orientation === "vertical") {
+            renderWidth += 1;
+        }
+
+        for (let j = 0; j < renderWidth; j++) {
             const hex = new HexagonDimensions(
                 Math.random() < randomnessModifier,
                 Math.random() < randomnessModifier
@@ -79,6 +91,7 @@ function renderHexGrid(grid, orientation) {
         for (let col = 0; col < grid[row].length; col++) {
             const el = grid[row][col];
             const hex = document.createElement('hexagon-block');
+            hex.classList.add('hex-element');
             hex.setAttribute('orientation', orientation);
             if (el.fill) {
                 hex.setAttribute('fill', 'true');
